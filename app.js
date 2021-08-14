@@ -10,7 +10,15 @@ app.use(bodyParser.json())
 
 app.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
+    let user_type = req.body.events[0].source.type;
+    let user_id = req.body.events[0].source.userId
     let msg = req.body.events[0].message.text
+
+    console.log(`Message token : ${ reply_token }`);
+    console.log(`Message user Type : ${ user_type }`);
+    console.log(`Message user ID : ${ user_id }`);
+    console.log(`Message : ${ msg }`);
+
     reply(reply_token, msg)
     res.sendStatus(200)
 })
@@ -38,12 +46,5 @@ function reply(reply_token, msg) {
         body: body
     }, (err, res, body) => {
         console.log('status = ' + res.statusCode);
-    });
-
-    request.post({
-        url: 'https://api.line.me/v2/bot/followers/ids',
-        headers: headers
-    }, (err, res, body) => {
-        console.log(res.userIds);
     });
 }
