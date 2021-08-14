@@ -44,6 +44,6 @@ function reply(reply_token, msg) {
         url: 'https://api.line.me/v2/bot/followers/ids',
         headers: headers
     }, (err, res, body) => {
-        console.log('userIds = ' + res.userIds);
+        console.log(res.userIds);
     });
 }
