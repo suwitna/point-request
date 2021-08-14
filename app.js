@@ -1,8 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const line = require('@line/bot-sdk');
 const request = require('request')
 const app = express()
 const port = process.env.PORT || 4000
+const client = new line.Client({
+    channelAccessToken: '6P5TzfMs7eu/RHrY1vQzjU/Zn4+Z0BgN6vM7uNZN/ED/TWV0rReqn4GAzkEV64LNFvS3gXiEVSldCQZUZ76nQArk8mqqsLZYt2tDItvjaACADcNPEGm8jtZ5ZzbQUG2SLKirsfVJzpkj3Ak5B+P/ygdB04t89/1O/w1cDnyilFU='
+  });
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.post('/webhook', (req, res) => {
@@ -12,6 +17,7 @@ app.post('/webhook', (req, res) => {
     res.sendStatus(200)
 })
 app.listen(port)
+  
 function reply(reply_token, msg) {
     let headers = {
         'Content-Type': 'application/json',
@@ -24,6 +30,16 @@ function reply(reply_token, msg) {
             text: msg
         }]
     })
+    client.getRoomMemberProfile('<roomId>', '<userId>')
+    .then((profile) => {
+        console.log(profile.displayName);
+        console.log(profile.userId);
+        console.log(profile.pictureUrl);
+        console.log(profile.statusMessage);
+    })
+    .catch((err) => {
+        // error handling
+    });
     request.post({
         url: 'https://api.line.me/v2/bot/message/reply',
         headers: headers,
