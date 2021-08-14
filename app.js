@@ -13,12 +13,13 @@ app.use(bodyParser.json())
 app.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
-    reply(reply_token, msg)
+    let userId = req.body.events[0].Client.profile.userId
+    reply(reply_token, msg, userId)
     res.sendStatus(200)
 })
 app.listen(port)
   
-function reply(reply_token, msg) {
+function reply(reply_token, msg, userId) {
     let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {6P5TzfMs7eu/RHrY1vQzjU/Zn4+Z0BgN6vM7uNZN/ED/TWV0rReqn4GAzkEV64LNFvS3gXiEVSldCQZUZ76nQArk8mqqsLZYt2tDItvjaACADcNPEGm8jtZ5ZzbQUG2SLKirsfVJzpkj3Ak5B+P/ygdB04t89/1O/w1cDnyilFU=}'
@@ -45,6 +46,7 @@ function reply(reply_token, msg) {
         headers: headers,
         body: body
     }, (err, res, body) => {
+        console.log('UserID = ' + userId);
         console.log('status = ' + res.statusCode);
     });
 }
