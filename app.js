@@ -1,6 +1,5 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const line = require('@line/bot-sdk');
 const request = require('request')
 const app = express()
 const port = process.env.PORT || 4000
