@@ -93,3 +93,47 @@ function reply(reply_token) {
         console.log('status = ' + res.statusCode);
     });
 }
+
+app.post('/webhook2',(req,res,next)=> { 
+    console.log("HTTP POST Request :: MikaTech Line App Webhook");
+    var reply_token = req.body.events[0].replyToken;
+    var user_type = req.body.events[0].source.type;
+    var user_id = req.body.events[0].source.userId
+    var msg = req.body.events[0].message.text;
+
+    console.log(`Message token : ${ reply_token }`);
+    console.log(`Message user Type : ${ user_type }`);
+    console.log(`Message user ID : ${ user_id }`);
+    console.log(`Message : ${ msg }`);
+    if (msg != null && msg != undefined){
+        console.log('Message :', msg.toString('utf8'));
+    }
+    reply2(reply_token);
+    res.sendStatus(200);
+});
+
+function reply2(reply_token) {
+    let headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {vXPb3uj+OGQRNuSdOp5/wTjTac0xecPNDwf11tt8HrTvjXU676g4f7DQI9ZIdFVpNXB5MboqbU+oqLle96G3ZGTcdr4zGAr4hzBEscSIAD4OJjZ5rPcGLv+cz+TcXOf2oOAufBE2Krq2vmaPhb/WzAdB04t89/1O/w1cDnyilFU=}'
+    }
+
+    let body = JSON.stringify({
+        replyToken: reply_token,
+        messages: [{
+            type: 'text',
+            text: 'สวัสดีคะ'
+        },
+        {
+            type: 'text',
+            text: 'ยินดีต้อนรับเข้าสู่ระบบสมาชิก ครูนัทห้อง5/2'
+        }]
+    })
+    request.post({
+        url: 'https://api.line.me/v2/bot/message/reply',
+        headers: headers,
+        body: body
+    }, (err, res, body) => {
+        console.log('status = ' + res.statusCode);
+    });
+}
