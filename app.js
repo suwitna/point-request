@@ -108,11 +108,11 @@ app.post('/webhook2',(req,res,next)=> {
     if (msg != null && msg != undefined){
         console.log('Message :', msg.toString('utf8'));
     }
-    reply2(reply_token);
+    reply2(reply_token, msg);
     res.sendStatus(200);
 });
 
-function reply2(reply_token) {
+function reply2(reply_token, msg) {
     let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {vXPb3uj+OGQRNuSdOp5/wTjTac0xecPNDwf11tt8HrTvjXU676g4f7DQI9ZIdFVpNXB5MboqbU+oqLle96G3ZGTcdr4zGAr4hzBEscSIAD4OJjZ5rPcGLv+cz+TcXOf2oOAufBE2Krq2vmaPhb/WzAdB04t89/1O/w1cDnyilFU=}'
