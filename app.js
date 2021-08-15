@@ -95,7 +95,7 @@ function reply(reply_token) {
 }
 
 app.post('/webhook2',(req,res,next)=> { 
-    console.log("HTTP POST Request :: MikaTech Line App Webhook");
+    console.log("HTTP POST Request :: ครูนัทห้อง5/2 Line App Webhook");
     var reply_token = req.body.events[0].replyToken;
     var user_type = req.body.events[0].source.type;
     var user_id = req.body.events[0].source.userId
