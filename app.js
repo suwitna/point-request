@@ -93,7 +93,7 @@ function reply(reply_token) {
         console.log('status = ' + res.statusCode);
     });
 }
-/*
+
 app.post('/webhook2',(req,res,next)=> { 
     console.log("HTTP POST Request :: ครูนัทห้อง5/2 Line App Webhook");
     var reply_token = req.body.events[0].replyToken;
@@ -137,4 +137,3 @@ function reply2(reply_token) {
         console.log('status = ' + res.statusCode);
     });
 }
-*/
