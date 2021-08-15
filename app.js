@@ -122,7 +122,7 @@ function reply2(reply_token) {
         replyToken: reply_token,
         messages: [{
             type: 'text',
-            text: 'สวัสดีคะ'
+            text: 'สวัสดีคะ '+ msg 
         },
         {
             type: 'text',
